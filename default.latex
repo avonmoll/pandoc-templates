@@ -25,7 +25,7 @@ $endif$
   \fi
   \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
 $if(euro)$
-  \newcommand{\euro}{€}
+  \newcommand{\euro}{Γé¼}
 $endif$
 $if(mainfont)$
     \setmainfont[$for(mainfontoptions)$$mainfontoptions$$sep$,$endfor$]{$mainfont$}
@@ -196,8 +196,21 @@ $if(subtitle)$
 \providecommand{\subtitle}[1]{}
 \subtitle{$subtitle$}
 $endif$
+
+\usepackage[noblocks]{authblk}
+
 $if(author)$
-\author{$for(author)$$author$$sep$ \and $endfor$}
+%\author{$for(author)$$if(author.name)$$author.name$$if(author.affiliation)$($author.affiliation$)$endif$$else$$author$$endif$$sep$ \and $endfor$}
+$for(author)$
+$if(author.name)$
+\author{$author.name$$if(author.email)$\thanks{$author.email$}$endif$}
+$if(author.affiliation)$
+\affil{$author.affiliation$}
+$endif$
+$else$
+\author{$author$}
+$endif$
+$endfor$
 $endif$
 \date{$date$}
 
